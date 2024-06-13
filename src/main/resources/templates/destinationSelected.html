@@ -1,0 +1,226 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    &lt;!&ndash; Add your head content here &ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;<h2>Your selected destination is: <span th:text="${destination}"></span></h2>&ndash;&gt;-->
+
+<!--<h3>List of Trains:</h3>-->
+<!--<table>-->
+<!--<tbody>-->
+<!--    <tr th:each="train : ${trains}">-->
+<!--        <span th:text="${train.getT_name()}"></span> - <span th:text="${train.getDeparture()}"></span> to <span th:text="${train.getDestination()}"></span>-->
+<!--        <br>-->
+<!--    </tr>-->
+<!--</tbody>-->
+<!--</table>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Ticketing</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/styleUser.css"> <!-- Assuming this is the correct path to your custom CSS file -->
+    <link rel="stylesheet" th:href="@{/css/styleUser.css}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            flex: 1;
+            margin: 0 auto; /* Add this to center the container */
+            max-width: 100%; /* Adjust this to control the width of the container */
+        }
+        .left-half {
+            background-image: url("/images/pass-bg.jpg");
+            background-size: cover;
+            background-position: center;
+            flex: 1;
+            max-width: 40%;
+        }
+        .right-half-container {
+            flex: 1;
+            display: flex;
+            padding-top: 90px;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: #00489B;
+            position: relative; /* Add this to contain the absolute positioned navbar */
+        }
+        .right-half {
+            flex: 1;
+            padding: 20px;
+        }
+        .scrollable-table {
+            overflow-y: auto;
+            max-height: calc(100vh - 64px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .train-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .train-card h2 {
+            margin-top: 0;
+        }
+        .book-button {
+            background-color: #00489B;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .book-button:hover {
+            background-color: #00489b7d;
+        }
+        /*.navbar {*/
+        /*    background-color: transparent;*/
+        /*    position: absolute;*/
+        /*    top: 0; !* Adjust this to position the navbar *!*/
+        /*    right: 0; !* Adjust this to position the navbar *!*/
+        /*    width: 100%; !* Add this to make the navbar span the full width of the container *!*/
+        /*    font-size: large;*/
+        /*    z-index: 1000; !* Ensure navbar is above other content *!*/
+        /*}*/
+        /*.navbar a {*/
+        /*    color: white;*/
+        /*    margin-right: 20px;*/
+        /*    text-decoration: none; !* Remove default underline *!*/
+        /*}*/
+        .book-now-btn {
+            background-color: #28a745; /* Green background color */
+            color: #fff; /* White text color */
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .book-now-btn:hover {
+            background-color: #692188; /* Darker green color on hover */
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="left-half"></div>
+    <div class="right-half-container">
+        <div th:include="navbarU :: navbar"></div>
+        <div class="right-half scrollable-table">
+
+            <div class="train-card" th:each="train : ${trains}">
+                <h2 th:text="'Train Name: ' +${train.getT_name()}">Train Name</h2>
+                <table>
+                    <tr>
+                        <th>Train Type</th>
+                        <td th:text="${train.getType()}"></td>
+                    </tr>
+                    <tr>
+                        <th>Departure</th>
+                        <td th:text="${train.getDeparture()}"></td>
+                    </tr>
+                    <tr>
+                        <th>Arrival</th>
+                        <td th:text="${train.getDestination()}"></td>
+                    </tr>
+                    <tr>
+                        <th>Departure Time</th>
+                        <td th:text="${train.getTime()}"></td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td th:text="${train.getFare()}"></td>
+                    </tr>
+                </table>
+                <a th:href="@{'/paymentOption?bookingId=' + ${bookingId} + '&' + 'tID=' + ${train.getTno()}}" class="book-button">Book Now</a>
+            </div>
+
+
+<!--            <div class="train-card">-->
+<!--                <h2>Express Train</h2>-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <th>Train Name</th>-->
+<!--                        <td>Express Liner</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Departure</th>-->
+<!--                        <td>09:00 AM</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Arrival</th>-->
+<!--                        <td>05:00 PM</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Price</th>-->
+<!--                        <td>$40</td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--                <button class="book-button">Book Now</button>-->
+<!--            </div>-->
+
+<!--            <div class="train-card">-->
+<!--                <h2>Rapid Express Train</h2>-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <th>Train Name</th>-->
+<!--                        <td>Rapid Express</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Departure</th>-->
+<!--                        <td>10:00 AM</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Arrival</th>-->
+<!--                        <td>06:00 PM</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>Price</th>-->
+<!--                        <td>$45</td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--                <button class="book-button">Book Now</button>-->
+<!--            </div>-->
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap and other scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

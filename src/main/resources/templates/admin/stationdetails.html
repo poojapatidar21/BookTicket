@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Station Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css}" rel="stylesheet">
+
+    <!-- Style.css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div th:include="admin/navbar :: navbar"></div>
+<!-- Page Content -->
+<div class="content">
+
+    <div class="form-group">
+        <label for="stationDropdown"><h5>Select Station:</h5></label>
+        <select class="form-control" id="stationDropdown" onchange="filterData()">
+            <option value="all">All stations</option>
+            <option value="Tokyo">Tokyo</option>
+            <option value="Shinagawa">Shinagawa</option>
+            <option value="Shin-Yokohama">Shin-Yokohama</option>
+            <option value="Nagoya">Nagoya</option>
+            <!-- Add more stations as needed -->
+        </select>
+    </div>
+
+    <div class="dashboard-cards" th:each="totalData : ${totalPassengersAndEarnings}">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Total Earnings</h6>
+                <p class="card-text" th:text="'￥'+${totalData[1]}">￥500,000</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Total Passengers</h6>
+                <p class="card-text" th:text="${totalData[0]}">15,000</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title" >Highest Earning Station</h6>
+                <p class="card-text" th:if="${highestEarningStation.size() > 0}" th:text="'￥'+${highestEarningStation[0][1]}">￥48,000</p>
+            </div>
+            <div class="station-section">
+                <p class="station-label" th:if="${highestEarningStation.size() > 0}" th:text="${highestEarningStation[0][0]}">Tokyo</p>
+            </div>
+        </div>
+        <!-- Add more cards as needed -->
+    </div>
+
+    <div class="finance-card1">
+        <table class="table  table-striped" id="stationTable">
+            <thead>
+            <tr class="card-title">
+                <th>ID</th>
+                <th>Station</th>
+                <th>Total Passengers </th>
+                <th>Total Earnings</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="stats, iterStat : ${destinationStats}">
+                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${stats[0]}">Tokyo</td>
+                <td th:text="${stats[1]}">￥48,000</td>
+                <td th:text="'￥'+${stats[2]}">15,00</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="finance-card1" >
+        <div class="financial-report">
+            <h4>Financial Report</h4>
+            <canvas id="financialChart" ></canvas>
+        </div>
+    </div>
+
+</div>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    $(document).ready(function () {
+        // Load navbar.html into the navbar-container div
+        $("#navbar-container").load("navbar.html");
+
+        // Call the function after the document is ready
+        showFinancialReport();
+    });
+
+    function showFinancialReport() {
+        // Generate sample data for the financial report chart
+        var ctx = document.getElementById('financialChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: 'Tokyo (Bar)',
+                    backgroundColor: 'rgba(161, 0, 255, 0.5)',
+                    borderColor: 'rgba(161, 0, 255, 0.8)',
+                    borderWidth: 1,
+                    data: [50000, 75000, 100000, 90000, 120000, 50000, 75000, 100000, 90000, 120000,80000, 140000]
+                }, {
+                    label: 'Tokyo (Line)',
+                    borderColor: 'rgba(134, 96, 209,1)',
+                    borderWidth: 2,
+                    fill: false,
+                    type: 'line',
+                    data: [50000, 75000, 100000, 90000, 120000, 50000, 75000, 100000, 90000, 120000, 80000, 140000]
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+
+    function filterData() {
+        var selectedstation = document.getElementById("stationDropdown").value;
+        var rows = document.getElementById("stationTable").getElementsByTagName("tbody")[0].rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var stationCell = rows[i].cells[1].innerText.toLowerCase();
+
+            if (selectedstation === "all" || stationCell === selectedstation.toLowerCase()) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+
+
+</script>
+</body>
+
+</html>

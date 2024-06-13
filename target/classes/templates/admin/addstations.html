@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Booking Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css}" rel="stylesheet">
+
+    <!-- Style.css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+
+<div th:include="admin/navbar :: navbar"></div>
+
+<!-- Page Content -->
+<div class="content ">
+    <div class="containers">
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <label for="file">Choose CSV File:</label>
+            <input type="file" id="file" name="file" accept=".csv">
+            <button type="submit">Upload</button>
+        </form>
+
+<!--        <h4>CSV File Upload</h4>-->
+<!--        <label for="fileInput">Choose CSV File</label>-->
+<!--        <input type="file" id="fileInput" accept=".csv" onchange="handleFileUpload()">-->
+<!--        <div id="confirmation" class="confirmation">File uploaded successfully!</div>-->
+    </div>
+</div>
+
+
+</body>
+
+</html>

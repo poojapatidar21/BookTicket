@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .login-container {
+            display: flex;
+            height: 100%;
+        }
+
+        .login-form-container {
+            flex: 1;
+            background: rgb(194, 125, 190);
+            color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-container {
+            width: 50%;
+            height: 100%;
+            /*background: url('C:/Users/mayank.shreshtha/Downloads/Acc_desktop_bg_forest-20210319.jpg'); !*Change according to the image location*!*/
+            background-size: cover;
+            background-position: center;
+        }
+
+
+
+        .login-form {
+            width: 70%;
+            background: rgb(255, 255, 255);
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .login-form input {
+            width: 95%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-form button {
+            width: 25%;
+            padding: 10px;
+            font-size: 13px;
+            background-color: #aa186d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="image-container"></div>
+    <div class="login-form-container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <div th:if="${message}">
+                <p th:utext="${message.replace('\n', '<br/>')}"></p>
+            </div>
+            <form method="post" action="/login">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required="">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required="">
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body></html>
+
+
+
+
+

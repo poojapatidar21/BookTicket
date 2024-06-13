@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Booking Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css}" rel="stylesheet">
+
+    <!-- Style.css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+
+<div th:include="admin/navbar :: navbar"></div>
+
+<!-- Page Content -->
+<div class="content ">
+    <!-- search-bar -->
+    <div class="search-bar">
+        <input type="text" class="form-control search-input" placeholder="Search by Email" id="searchInput">
+        <button class="btn btn-primary" onclick="searchPassenger()">Search</button>
+    </div>
+
+
+    <!-- Example Table -->
+    <div class="finance-card1">
+        <table class="table table-striped" >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Query</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="messages : ${messages}">
+                <td th:text="${messages.id}">1</td>
+                <td th:text="${messages.email}">JohnDoe@test.com</td>
+                <td th:text="${messages.messages}">During the journey, I encountered Uncomfortable Seating & Delayed Departure During the journey,< I encountered Uncomfortable Seating & Delayed DepartureDuring the journey, I encountered Uncomfortable Seating & Delayed DepartureDuring the journey, I encountered Uncomfortable Seating & Delayed Departure</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<script>
+    $(function () {
+        // Load navbar.html into the navbar-container div
+        $("#navbar-container").load("navbar.html");
+    });
+
+    function searchPassenger() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.querySelector(".table");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // index 2 corresponds to the Last Name column
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+
+</html>

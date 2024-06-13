@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOT RAILWAY TICKETING SYSTEM</title>
+    <link rel="stylesheet" href="/css/stylesU.css">
+</head>
+<body>
+    <div class="container">
+        <div class="banner"></div>
+        <img src="/images/SoT_Logo.png" alt="SoT Logo" class="logo">
+        <div class="header">
+            <h1>SOT RAILWAY TICKETING SYSTEM</h1>
+        </div>
+        <div th:if="${error_message}">
+            <p class="error2" th:utext="${error_message.replace('\n', '<br/>')}"></p>
+        </div>
+<!--        <div class="form-banner">-->
+        <div th:class="${s}">
+            <p>Hello <span th:text="${first_name}"></span> <span th:text="${last_name}"></span> !</p>
+            <p>Enter the OTP sent for the email <span th:text="${email}"> !</span></p>
+            <form method="post">
+                <input type="hidden" name="first_name" th:value="${first_name}"/>
+                <input type="hidden" name="last_name" th:value="${last_name}"/>
+                <input type="hidden" name="email" th:value="${email}"/>
+                <input type="hidden" name="p1" th:value="${p1}"/>
+                <input type ="text" id="OTP" name = "OTP" placeholder = "Enter OTP" required><br>
+                <button type ="submit">Validate User</button>
+            </form>
+            <p>Wrong Email ID??, Click <a href="/registration">here</a>!</p>
+        </div>
+    </div>
+</body>
+</html>

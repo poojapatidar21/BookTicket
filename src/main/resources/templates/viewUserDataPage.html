@@ -1,0 +1,28 @@
+<!-- viewUserDataPage.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View User Data</title>
+</head>
+<body>
+<h2>User Data List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Departure</th>
+        <th>Destination</th>
+        <!-- Add table headers for other fields -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="userData : ${userDataList}">
+        <td th:text="${userData.departure}"></td>
+        <td th:text="${userData.destination}"></td>
+        <!-- Add table data for other fields -->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

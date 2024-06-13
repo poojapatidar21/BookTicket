@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .booking-details-container {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .details-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .details-column > div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="booking-details-container">
+    <div class="row">
+        <div class="col-md-6 details-column">
+            <div><strong>Name:</strong> <span th:text="${#strings.capitalize(session.user.getUsername())}"></span></div>
+            <div><strong>Booking ID:</strong> <span th:text="${userData.getBookingId()}"></span></div>
+            <div><strong>Departure Station:</strong> <span th:text="${userData.getDeparture()}"></span></div>
+            <div><strong>Destination Station:</strong> <span th:text="${userData.getDestination()}"></span></div>
+        </div>
+        <!-- Add another column if needed -->
+    </div>
+</div>
+
+<!-- Bootstrap and other scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

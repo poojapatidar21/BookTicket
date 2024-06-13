@@ -1,0 +1,235 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+body::after {
+    content: "";
+    background-image: url('/images/grid.png');
+    background-size: 100% 100%;
+    background-repeat: repeat;
+    background-size: cover;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+}
+.header {
+    background-image: url('/images/grid.png'); /*change path of img as needed*/
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 0; /* Adjust padding as needed */
+}
+
+.content-container {
+    max-width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background color */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.contact-text {
+    margin-bottom: 10px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn-submit {
+    background-color: #A100FF; /* Bootstrap primary color for buttons */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #460073; /* Darker blue color on hover */
+}
+#video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    transform: scaleX(-1);
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+}
+
+
+
+
+#booking-container {
+    position: fixed;
+    top: 0;
+    left: 50px; /* 50px margin to the left */
+    height: 100%;
+    width: calc(45% - 50px); /* 45% of the page width with margin */
+    min-width: 500px; /* Minimum width of 500px */
+    max-width: 600px;
+
+    padding-top: 20vh;
+    padding-bottom: 250px;
+    padding-left: 50px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    flex: 0 0 48%; /* Two columns with a little gap between them */
+}
+
+.form-group-title {
+    color: white;
+    font-size: 72px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group input[type="text"], input[type="date"], input[type="button"], input[type="number"]  {
+    width: calc(100% - 16px); /* 100% width minus padding */
+    padding: 8px;
+    box-sizing: border-box;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Round angle */
+    margin-bottom: 0; /* No spacing between input boxes */
+}
+
+.form-group input::placeholder {
+    color: #ccc; /* Placeholder text color in gray */
+}
+
+.form-group .ios-switch {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 25px;
+}
+
+.form-group .ios-switch input {
+    display: none;
+}
+
+.form-group .ios-switch-label {
+    position: absolute;
+    top: 5px;
+    left: 85px;
+    margin-right: 20px;
+    width: 36px;
+    height: 18px;
+    background-color: #ddd;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group .ios-switch-handle {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.form-group .ios-switch input:checked + .ios-switch-label {
+    background-color: #4CAF50;
+}
+
+.form-group .ios-switch input:checked + .ios-switch-label .ios-switch-handle {
+    transform: translateX(18px);
+}
+
+.form-group label {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.navbar {
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: large;
+}
+
+.navbar a {
+    color: white;
+    margin-right: 20px;
+    text-decoration: none;
+}
+.form-group .btn-primary {
+    width: calc(100% - 16px); /* 100% width minus padding */
+    padding: 6px;
+    box-sizing: border-box;
+    border: 0px solid #A100FF; /* Adjust border color as needed */
+    border-radius: 10px; /* Round angle */
+    margin-bottom: 10px; /* Add some margin for spacing */
+    margin-top: 24px;
+    background-color: #A100FF;
+    transition: background-color 0.5s ease;
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* 悬停时的背景颜色 */
+    color: white; /* 悬停时的文本颜色 */
+}
+.book-now-btn {
+    background-color: #28a745; /* Green background color */
+    color: #fff; /* White text color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none; /* Remove default underline */
+}
+
+.book-now-btn:hover {
+    background-color: #692188; /* Darker green color on hover */
+}
+#scroll-down-container {
+    position: fixed;
+    width: 100%;
+    height: 60vh;
+    bottom: -100vh;
+    background-color: white;
+    transition: opacity 0.5s ease;
+}
+
+#scroll-down-container-content {
+    padding: 20px;
+    box-sizing: border-box;
+}

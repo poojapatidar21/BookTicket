@@ -1,0 +1,113 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .container {
+    background-image: url('/images/Background.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 92px;
+    background-color: rgba(253, 236, 255, 0.5);
+  }
+  
+  .logo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 107px;
+    height: 90px;
+  }
+  
+  .header {
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-banner {
+    position: relative;
+    z-index: 0;
+    background-color: rgba(253, 236, 255, 0.5);
+    margin-top: 80px;
+    padding: 20px;
+  }
+.form-banner2 {
+    position: relative;
+    z-index: 0;
+    background-color: rgba(253, 236, 255, 0.5);
+    margin-top: 35px;
+    padding: 20px;
+}
+  
+  h1 {
+     color:black;
+     text-align:left;
+     padding-left: 10px;
+     padding-top :30px;
+     margin-top: 0;
+     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  form {
+     text-align:center; 
+     /* padding-top :50px;  */
+  }
+  
+  input[type=text], input[type=email], input[type=password] {
+     width :30%;
+     padding :12px ;
+     margin :8px ;
+     display:inline-block ;
+     border-radius :25px ;
+     border: none;
+  }
+  
+  button{
+       width:auto ;
+       padding :10px ;
+       margin :2px ;
+       border-radius :25px;
+       border:none ; 
+       cursor:pointer ; 
+       background-color: #FEBFFF;
+       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .box2 {
+      text-align:center;
+      width :100%;
+      padding :12px ;
+      margin :8px ;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: black;
+  }
+.reg2 {
+    width:auto ;
+    padding :10px ;
+    margin :2px ;
+    border-radius :25px ;
+    border:none ;
+    cursor:pointer ;
+    background-color: #FEBFFF;
+    text-decoration: none;
+    color: black;
+}
+.error2 {
+    margin: 0;
+    padding: 10px 0 0 20px;
+    color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

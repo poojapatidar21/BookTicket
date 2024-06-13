@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Registration System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body::after {
+            content: "";
+            background-image: url('/images/grid.png');
+            background-size: 100% 100%;
+            background-repeat: repeat;
+            background-size: cover;
+            opacity: 0.5;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+        }
+
+        #video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            transform: scaleX(-1);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+        }
+
+
+
+
+        #booking-container {
+            position: fixed;
+            top: 0;
+            left: 50px; /* 50px margin to the left */
+            height: 100%;
+            width: calc(45% - 50px); /* 45% of the page width with margin */
+            min-width: 500px; /* Minimum width of 500px */
+            max-width: 600px;
+
+            padding-top: 20vh;
+            padding-bottom: 250px;
+            padding-left: 50px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+            flex: 0 0 48%; /* Two columns with a little gap between them */
+        }
+
+        .form-group-title {
+            color: white;
+            font-size: 72px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group input[type="text"], input[type="date"], input[type="button"], input[type="number"]  {
+            width: calc(100% - 16px); /* 100% width minus padding */
+            padding: 8px;
+            box-sizing: border-box;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px; /* Round angle */
+            margin-bottom: 0; /* No spacing between input boxes */
+        }
+
+        .form-group select {
+            width: calc(100% - 16px); /* 100% width minus padding */
+            padding: 8px;
+            box-sizing: border-box;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 0;
+            color: #555; /* Adjust the text color as needed (less white) */
+            /*background-color: #333; !* Adjust the background color as needed (less white) *!*/
+        }
+
+        .form-group input::placeholder {
+            color: #ccc; /* Placeholder text color in gray */
+        }
+
+        .form-group .ios-switch {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 25px;
+        }
+
+        .form-group .ios-switch input {
+            display: none;
+        }
+
+        .form-group .ios-switch-label {
+            position: absolute;
+            top: 5px;
+            left: 85px;
+            margin-right: 20px;
+            width: 36px;
+            height: 18px;
+            background-color: #ddd;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group .ios-switch-handle {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            width: 16px;
+            height: 16px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .form-group .ios-switch input:checked + .ios-switch-label {
+            background-color: #4CAF50;
+        }
+
+        .form-group .ios-switch input:checked + .ios-switch-label .ios-switch-handle {
+            transform: translateX(18px);
+        }
+
+        .form-group label {
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .navbar {
+            background-color: transparent;
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            font-size: large;
+        }
+
+        .navbar a {
+            color: white;
+            margin-right: 20px;
+        }
+        .form-group .btn-primary {
+            width: calc(100% - 16px); /* 100% width minus padding */
+            padding: 6px;
+            box-sizing: border-box;
+            border: 0px solid #A100FF; /* Adjust border color as needed */
+            border-radius: 10px; /* Round angle */
+            margin-bottom: 10px; /* Add some margin for spacing */
+            margin-top: 24px;
+            background-color: #A100FF;
+            transition: background-color 0.5s ease;
+        }
+        .btn-primary:hover {
+            background-color: #631ed0; /* 悬停时的背景颜色 */
+            color: white; /* 悬停时的文本颜色 */
+        }
+        #scroll-down-container {
+            position: fixed;
+            width: 100%;
+            height: 60vh;
+            bottom: -100vh;
+            background-color: white;
+            transition: opacity 0.5s ease;
+        }
+
+        #scroll-down-container-content {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-y: scroll;
+        }
+
+    </style>
+
+</head>
+<body>
+<video id="video-background" autoplay muted loop>
+    <source src="/images/mov02.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<div id="overlay"></div>
+<form action="/home" method="post" role="form" object="${user_data}">
+    <div id="booking-container">
+        <h2 class="form-group-title">SoT Railway Tickets</h2>
+
+        <div class="form-group">
+            <label for="departure">Departure:</label>
+            <select id="departure" name="departure">
+                <option value="">Select</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="Shinagawa">Shinagawa </option>
+                <option value="Shin-Yokohama">Shin-Yokohama</option>
+                <option value="Nagoya">Nagoya</option>
+                <!--                <option value="Hiroshima">Hiroshima</option>-->
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="destination">Destination:</label>
+            <select id="destination" name="destination">
+                <option value="">Select</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="Shinagawa">Shinagwa</option>
+                <option value="Shin-Yokohama">Shin-Yokohama</option>
+                <option value="Nagoya">Nagoya</option>
+                <!--                <option value="Hiroshima">Hiroshima</option>-->
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="departureDate">Departure Date:</label>
+            <input type="date" id="departureDate" name="departureDate1" placeholder="mm/dd/yyyy">
+        </div>
+
+        <div class="form-group">
+            <label for="returnDate">Return Date:</label>
+            <input type="date" id="returnDate" name="departureDate2" placeholder="mm/dd/yyyy" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="numberOfTickets">Number of Tickets:</label>
+            <input type="number" id="numberOfTickets" name="numberOfTickets" min="1" value="1">
+        </div>
+
+        <div class="form-group">
+            <!--            <label for="btn-primary"> </label>-->
+            <button type="submit" class="btn btn-primary" >Book Now</button>
+        </div>
+
+
+        <div class="form-group checkbox-label">
+            <label class="ios-switch" for="roundTrip">
+                <input type="checkbox" id="roundTrip" name="roundTrip">
+                <div class="ios-switch-label">
+                    <div class="ios-switch-handle"></div>
+                </div>
+                Round trip
+            </label>
+        </div>
+
+    </div>
+</form>
+
+<div id="scroll-down-container">
+    <div id="scroll-down-container-content">
+    </div>
+</div>
+
+<div th:include="navbarU :: navbar"></div>
+
+<!-- Your content goes here -->
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--<script>-->
+<!--    // Function to get today's date in the format YYYY-MM-DD-->
+<!--    function getTodayDate() {-->
+<!--        var today = new Date();-->
+<!--        var dd = String(today.getDate()).padStart(2, '0');-->
+<!--        var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!-->
+<!--        var yyyy = today.getFullYear();-->
+<!--        return yyyy + '-' + mm + '-' + dd;-->
+<!--    }-->
+
+<!--    // Set default value of departure date to today-->
+<!--    document.getElementById('departureDate').value = getTodayDate();-->
+
+<!--    // Enable return date input only after selecting departure date-->
+<!--    document.getElementById('departureDate').addEventListener('change', function() {-->
+<!--        // Check if the selected departure date is earlier than today-->
+<!--        var selectedDepartureDate = this.value;-->
+<!--        if (selectedDepartureDate < getTodayDate()) {-->
+<!--            alert('Departure date cannot be earlier than today.');-->
+<!--            this.value = getTodayDate(); // Reset to today's date-->
+<!--        } else {-->
+<!--            document.getElementById('returnDate').removeAttribute('disabled');-->
+<!--            document.getElementById('returnDate').setAttribute('min', selectedDepartureDate);-->
+<!--        }-->
+<!--    });-->
+
+<!--    // Add logic to enable/disable return date based on checkbox state-->
+<!--    document.getElementById('roundTrip').addEventListener('change', function() {-->
+<!--        var returnDateInput = document.getElementById('returnDate');-->
+<!--        returnDateInput.disabled = !this.checked;-->
+<!--        returnDateInput.value = ''; // Reset return date value when disabling-->
+<!--    });-->
+
+<!--    // Add logic to check conditions for enabling/disabling return date-->
+<!--    document.getElementById('bookNowBtn').addEventListener('click', function() {-->
+<!--        var departureDate = document.getElementById('departureDate').value;-->
+<!--        var roundTripCheckbox = document.getElementById('roundTrip');-->
+
+<!--        var returnDateInput = document.getElementById('returnDate');-->
+<!--        var returnDate = returnDateInput.value;-->
+
+<!--        if (!departureDate) {-->
+<!--            // Do something when conditions are met-->
+<!--            alert('Please fill in Departure Date');-->
+<!--        }-->
+<!--        if(roundTripCheckbox.checked && !(returnDate)) {-->
+<!--            // Do something when conditions are met-->
+<!--            alert('Please fill in Return Date');-->
+<!--        }-->
+<!--    });-->
+
+<!--</script>-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Function to disable the selected option in the Destination select element
+    function updateDestinationOptions() {
+        var departureSelect = document.getElementById('departure');
+        var destinationSelect = document.getElementById('destination');
+
+// Enable all options in the Destination select element
+        for (var i = 0; i < destinationSelect.options.length; i++) {
+            destinationSelect.options[i].disabled = false;
+            destinationSelect.options[i].style.color = '';
+// Reset color
+        }
+
+// Disable the selected option in the Destination select element
+        if (departureSelect.value) {
+            var selectedOption = departureSelect.value;
+            for (var i = 0; i < destinationSelect.options.length; i++) {
+                if (destinationSelect.options[i].value === selectedOption) {
+                    destinationSelect.options[i].disabled = true;
+                    destinationSelect.options[i].style.color = '#ccc';
+// Set disabled color
+                    break;
+                }
+            }
+        }
+    }
+    function updateDepartureOptions() {
+        var departureSelect = document.getElementById('departure');
+        var destinationSelect = document.getElementById('destination');
+        var selectedDestination = destinationSelect.value;
+
+// Enable all options in the Departure select element
+        for (var i = 0; i < departureSelect.options.length; i++) {
+            departureSelect.options[i].disabled = false;
+            departureSelect.options[i].style.color = '';
+// Reset color
+        }
+
+// Disable the selected Destination option in the Departure select element
+        for (var i = 0; i < departureSelect.options.length; i++) {
+            if (departureSelect.options[i].value === selectedDestination) {
+                departureSelect.options[i].disabled = true;
+                departureSelect.options[i].style.color = '#ccc';
+// Set disabled color
+                break;
+            }
+        }
+    }
+
+    // Event listener for the Destination select element
+    document.getElementById('destination').addEventListener('change', function () {
+// Update Departure options when Destination is changed
+        updateDepartureOptions();
+    });
+
+    // Initial call to update Departure options based on selected Destination
+    updateDepartureOptions();
+
+    // Event listener for the Departure select element
+    document.getElementById('departure').addEventListener('change', function () {
+// Update Destination options when Departure is changed
+        updateDestinationOptions();
+    });
+
+    // Function to get today's date in the format YYYY-MM-DD
+    function getTodayDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+// January is 0!
+        var yyyy = today.getFullYear();
+        return yyyy + '-' + mm + '-' + dd;
+    }
+
+    // Set default value of departure date to today
+    document.getElementById('departureDate').value = getTodayDate();
+
+    // Set default value of return date to empty
+    document.getElementById('returnDate').value = '';
+
+    // Set return date to disabled by default
+    document.getElementById('returnDate').setAttribute('disabled', 'true');
+
+    // Add logic to enable/disable return date based on roundTrip checkbox state
+    document.getElementById('roundTrip').addEventListener('change', function () {
+        var returnDateInput = document.getElementById('returnDate');
+        var departureDateInput = document.getElementById('departureDate');
+
+// Disable return date if roundTrip is unchecked
+        if (!this.checked) {
+            returnDateInput.setAttribute('disabled', 'true');
+            returnDateInput.value = '';
+// Reset return date value
+        } else {
+// Enable return date if roundTrip is checked
+            returnDateInput.removeAttribute('disabled');
+
+// Set min attribute for return date to ensure it's not earlier than departure date
+            returnDateInput.setAttribute('min', departureDateInput.value);
+
+// Reset return date value if it's earlier than departure date
+            if (returnDateInput.value < departureDateInput.value) {
+                returnDateInput.value = departureDateInput.value;
+            }
+        }
+    });
+
+    // Add logic to check if departure date is earlier than today
+    document.getElementById('departureDate').addEventListener('change', function () {
+        var selectedDepartureDate = this.value;
+        var today = getTodayDate();
+
+// Ensure departure date is not earlier than today
+        if (selectedDepartureDate < today) {
+            alert('Departure date cannot be earlier than today.');
+            this.value = today;
+// Reset to today's date
+        }
+
+// Set min attribute for return date to ensure it's not earlier than departure date
+        document.getElementById('returnDate').setAttribute('min', selectedDepartureDate);
+    });
+
+    // Add logic to check if return date is not later than today and not earlier than departure date
+    document.getElementById('returnDate').addEventListener('change', function () {
+        var returnDate = this.value;
+        var today = getTodayDate();
+        var departureDate = document.getElementById('departureDate').value;
+        if (returnDate < today || returnDate < departureDate) {
+            alert('Return date cannot be earlier than departure date or today.');
+            this.value = today;
+// Reset to today's date
+        }
+    });
+
+    // Add logic to check conditions for enabling/disabling return date
+    document.getElementById('bookNowBtn').addEventListener('click', function () {
+        var roundTripCheckbox = document.getElementById('roundTrip');
+        var returnDateInput = document.getElementById('returnDate');
+        var departureDate = document.getElementById('departureDate').value;
+        var returnDate = returnDateInput.value;
+        if (roundTripCheckbox.checked && returnDate < departureDate) {
+// Do something when conditions are met
+            alert('Return date cannot be earlier than departure date.');
+        } else if (returnDate < getTodayDate()) {
+// Do something when conditions are met
+            alert('Return date cannot be earlier than today.');
+        } else {
+// Continue with your booking logic
+        }
+    });
+
+    /* Add logic to check conditions for enabling/disabling return date
+        document.getElementById('bookNowBtn').addEventListener('click', function () {
+            var departureDate = document.getElementById('departureDate').value;
+            var roundTripCheckbox = document.getElementById('roundTrip');
+
+            var returnDateInput = document.getElementById('returnDate');
+            var returnDate = returnDateInput.value;
+
+            if (!departureDate) {
+                // Do something when conditions are met
+                alert('Please fill in Departure Date');
+            }
+            if (roundTripCheckbox.checked && !(returnDate)) {
+                // Do something when conditions are met
+                alert('Please fill in Return Date');
+            }
+        });*/
+
+    // Initial call to update Destination options based on Departure value
+    updateDestinationOptions();
+</script>
+
+
+</body>
+</html>

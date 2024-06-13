@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Booking Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css}" rel="stylesheet">
+
+    <!-- Style.css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+
+<div th:include="admin/navbar :: navbar"></div>
+
+<!-- Page Content -->
+<div class="content ">
+    <div class="containers">
+        <div class="success-icon">&#10004;</div>
+        <div class="message">File uploaded successfully!</div>
+    </div>
+    <div class="finance-card1">
+        <table class="table  table-striped">
+            <thead>
+            <tr class="card-title">
+                <th>ID</th>
+                <th>Train Type</th>
+                <th>Train Name</th>
+                <th>Fare Adjustment</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="train,iterStat : ${trains}" >
+                <td th:text="${iterStat.count}">1</td>
+                <td th:text="${train.trainName}"> Tokyo</td>
+                <td th:text="${train.stationName}">￥48,000</td>
+                <td th:text="${train.fare}">15,00</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+
+</html>

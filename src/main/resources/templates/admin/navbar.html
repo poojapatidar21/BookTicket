@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css}" rel="stylesheet">
+
+    <!-- Style.css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+<!--                <button onclick="showNotification()">Show Notification</button>-->
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/query">
+                            <i class="fas fa-bell"></i>
+                            <span id="notification-badge"></span>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/profile"><i th:class="'fas fa-user-circle'" ></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><i th:class="'fas fa-sign-out-alt'"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/admin/home"><i th:class="'fas fa-chart-bar'"></i> Financial Report</a>
+        <a href="/admin/passengers"><i th:class="'fas fa-users'"></i> Passenger Details</a>
+        <a href="/admin/stations"><i th:class="'fa fa-train'"></i> Station Details</a>
+        <a href="/admin/bookings"><i th:class="'fa fa-calendar'"></i> Booking Details</a>
+        <a href="/admin/addstations"><i th:class="'fa fa-plus-circle'"></i> Add Stations</a>
+        <a href="/admin/settings"><i th:class="'fa fa-cog'"></i> Settings</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include jQuery to handle sidebar navigation -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script th:inline="javascript">
+        var count = /*[[${count}]]*/ '';
+    </script>
+    <script>
+        let notificationCount = count;
+        var options = {
+            body: `You have ${notificationCount} new notifications`,
+            icon: 'path/to/your/icon.png', // Replace with the path to your icon
+            badge: 'path/to/your/badge.png', // Replace with the path to your badge
+            tag: 'notification-tag'
+        };
+
+        var notification = new Notification('Notification Title', options);
+        const badgeElement = document.getElementById('notification-badge');
+        badgeElement.textContent = notificationCount;
+        badgeElement.style.display = 'inline-block';
+    </script>
+
+</div>
+</body>
+
+</html>

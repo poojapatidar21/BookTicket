@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOT Railway Ticketing System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .left-side {
+            flex: 1;
+            background-image: url('/images/Background.jpg');
+            background-size: cover;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content:center;
+        }
+
+        .right-side {
+            flex: 1;
+            background-color:#FDECFF;
+            display:flex;
+            flex-direction : column;
+            align-items:center;
+            justify-content:center
+        }
+
+        img{
+            position:absolute;
+            top :10px ; right :10px ;
+            width :107px ; height :90px ;
+        }
+
+        button{
+            margin-top :20px ; padding :10px ; border-radius :5px ;
+            border:none ; cursor:pointer ; background-color: #FEBFFF;
+            font-family: 'Itim', cursive; font-size: 25px;
+        }
+
+        h2{
+            margin-bottom:-20px ;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left-side">
+        <h1>SoT RAILWAY TICKETING SYSTEM</h1>
+    </div>
+
+    <img src = "/images/SoT_Logo.png" alt = "logo">
+
+    <div class="right-side">
+        <button onclick="location.href='/registration'">User Registration</button>
+        <button onclick="location.href='/login'">Login</button>
+        <button onclick="location.href='/loginAdmin'">Login as Admin</button>
+    </div>
+
+
+</div>
+</body>
+</html>

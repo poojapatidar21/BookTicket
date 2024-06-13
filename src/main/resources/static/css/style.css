@@ -1,0 +1,205 @@
+body {
+    padding-top: 56px;
+    background-color: rgb(230, 230, 230);
+}
+
+.navbar {
+    background-color: rgb(134, 96, 209);
+    color: white;
+}
+
+.top-navbar {
+    background-color: rgb(134, 96, 209);
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-navbar img {
+    height: 30px;
+    width: auto;
+}
+
+.top-navbar-icons i {
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 56px;
+    left: 0;
+    background-color:  rgb(134, 96, 209);
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.sidebar a:hover {
+    color: rgba(0, 0, 0, 0.15);
+}
+.nav-item a{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+.nav-item a:hover {
+    color: rgba(0, 0, 0, 0.15);
+}
+.navbar-brand{
+    color: white;
+}
+#notification-badge {
+    position: relative;
+    top: -15px;
+    left: -15px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0 5px;
+    font-size: 12px;
+    display: none;
+}
+
+.dashboard-cards {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.card {
+    width: 18rem;
+    border-radius: 1.25rem;
+}
+.finance-card1 {
+    background-color: #fff;
+    border-radius: 1.25rem;
+    margin-top: 20px;
+    padding: 20px;
+    margin-bottom: 10px;
+    position: relative;
+}
+.finance-card2 {
+    width: 68%; /* Adjust as needed */
+    margin: 10px;
+}
+.chart-card{
+    display: flex;
+}
+.finance-card3 {
+    width: 32%; /* Adjust as needed */
+    margin: 10px;
+}
+.financial-report {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 1.25rem;
+    height: 100%;
+}
+
+/* Adjust width and height of charts */
+#financialChart {
+    width: 100%; /* Adjust as needed */
+    height: 200px;
+}
+
+#passengerPieChart {
+    width: 100%; /* Adjust as needed */
+    height: 200px;
+}
+.finance-card table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.card-body h5 {
+    font-size: 24px;
+}
+.station-section {
+    position: absolute;
+    top: 45px;
+    right: 20px;
+    background-color: rgb(134, 96, 209);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    padding: 8px;
+}
+.station-label {
+    color: white;
+    margin: 0;
+    font-size: 14px; /* Adjust font size as needed */
+}
+.search-bar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.search-input {
+    width: 250px;
+    margin-right: 10px;
+    border-radius: 1rem;
+}
+.btn{
+    background-color:  rgb(134, 96, 209);
+    border-radius: 1rem;
+}
+.form-control{
+    border-radius: 0.8rem;
+}
+
+.containers {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: rgb(134, 96, 209); ;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+label:hover {
+    background-color: #2980b9;
+}
+
+.confirmation {
+    display: none;
+    color: #2ecc71;
+    font-size: 24px;
+    margin-top: 20px;
+}
